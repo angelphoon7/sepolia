@@ -1,4 +1,5 @@
 import * as chains from "viem/chains";
+import { useEffect } from "react";
 
 export type ScaffoldConfig = {
   targetNetworks: readonly chains.Chain[];
@@ -35,3 +36,11 @@ const scaffoldConfig = {
 } as const satisfies ScaffoldConfig;
 
 export default scaffoldConfig;
+
+if (typeof window !== "undefined" && typeof indexedDB !== "undefined") {
+  // Safe to use indexedDB here
+}
+
+useEffect(() => {
+  // Import or use the library here
+}, []);
