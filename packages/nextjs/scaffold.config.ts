@@ -36,11 +36,3 @@ const scaffoldConfig = {
 } as const satisfies ScaffoldConfig;
 
 export default scaffoldConfig;
-
-if (typeof window !== "undefined" && typeof indexedDB !== "undefined") {
-  // Safe to use indexedDB here
-}
-
-useEffect(() => {
-  // Import or use the library here
-}, []);
