@@ -40,3 +40,4 @@ export default scaffoldConfig;
 
 // Remove useEffect and dynamic import since this is a config file
 
+
