@@ -36,3 +36,6 @@ const scaffoldConfig = {
 } as const satisfies ScaffoldConfig;
 
 export default scaffoldConfig;
+
+// Remove useEffect and dynamic import since this is a config file
+// If web3modal functionality is needed, it should be in a React component file instead
