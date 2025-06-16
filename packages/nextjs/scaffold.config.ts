@@ -1,5 +1,6 @@
 import * as chains from "viem/chains";
 import { useEffect } from "react";
+import dynamic from "next/dynamic";
 
 export type ScaffoldConfig = {
   targetNetworks: readonly chains.Chain[];
@@ -38,4 +39,4 @@ const scaffoldConfig = {
 export default scaffoldConfig;
 
 // Remove useEffect and dynamic import since this is a config file
-// If web3modal functionality is needed, it should be in a React component file instead
+
