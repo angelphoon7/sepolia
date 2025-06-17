@@ -50,6 +50,7 @@
   "devDependencies": {
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "hardhat": "^2.24.3",
     "husky": "~8.0.3",
     "lint-staged": "~13.2.2"
   },

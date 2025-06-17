@@ -1,14 +1,43 @@
 "use client";
 
+import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { NextPage } from "next";
 import { useAccount } from "wagmi";
 import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { Address } from "~~/components/scaffold-eth";
+import { getIndexedDB, getDBName, DB_VERSION, DB_STORE_NAME } from "../utils/indexedDB";
 
 const Home: NextPage = () => {
   const { address: connectedAddress } = useAccount();
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const indexedDB = getIndexedDB();
+    if (!indexedDB) {
+      console.warn("IndexedDB not supported in this browser.");
+      return;
+    }
+
+    const request = indexedDB.open(getDBName(), DB_VERSION);
+
+    request.onupgradeneeded = () => {
+      const db = request.result;
+      if (!db.objectStoreNames.contains(DB_STORE_NAME)) {
+        db.createObjectStore(DB_STORE_NAME);
+      }
+    };
+
+    request.onsuccess = () => {
+      console.log("✅ IndexedDB opened successfully");
+    };
+
+    request.onerror = () => {
+      console.error("❌ Failed to open IndexedDB", request.error);
+    };
+  }, []);
 
   return (
     <>
@@ -54,7 +83,7 @@ const Home: NextPage = () => {
                   </p>
                   <p className="text-center text-lg">
                     🌟 The final deliverable is an app that lets users purchase and transfer NFTs. Deploy your contracts
-                    to a testnet then build and upload your app to a public web server. Submit the url on{" "}
+                    to a testnet then build and upload your app to a public web server. Submit the URL on{" "}
                     <a href="https://speedrunethereum.com/" target="_blank" rel="noreferrer" className="underline">
                       SpeedRunEthereum.com
                     </a>{" "}
